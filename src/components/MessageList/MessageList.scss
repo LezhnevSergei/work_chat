@@ -1,0 +1,31 @@
+.chat {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.common-chat__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#chat-window {
+    height:70vh;
+
+    margin: 0 auto;
+    margin-bottom: 10px;
+
+    overflow-y: auto;
+    position: relative;
+
+    width: 800px;
+
+}
+
+.empty-message {
+    text-align: center;
+    color: #f9fbe7;
+    font-size: 24px;
+    font-weight: bold;
+}

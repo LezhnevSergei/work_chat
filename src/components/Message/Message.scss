@@ -1,0 +1,46 @@
+.common-chat__message {
+    background-color: white;
+
+    margin: 0;
+    padding: 0;
+
+    margin-bottom: 10px;
+    padding: 10px 20px;
+
+    display: flex;
+    justify-content: space-between;
+
+    box-shadow:0px 1px 4px 1px rgba(0,0,0,0.16);
+
+    .message__author {
+        padding: 0;
+        margin: 0;
+
+        margin-bottom: 10px;
+    }
+
+    .message__text {
+        padding: 0;
+        margin: 0;
+
+        margin-bottom: 5px;
+    }
+
+    .message__publish-date {
+        padding: 0;
+        margin: 0;
+    }
+
+}
+
+.message__buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    button {
+        background: transparent;
+        border-radius: 5px;
+        border: 2px solid #000000;
+    }
+}

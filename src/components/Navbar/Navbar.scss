@@ -1,0 +1,29 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+
+    list-style: none;
+
+    &__item {
+        text-decoration: none;
+    }
+
+    &__link {
+        display: block;
+
+        padding: 5px 10px;
+
+        color: #0d47a1;
+
+        &.active {
+            background-color: #e0f7fa;
+        }
+
+        &:hover {
+            background-color: #ffffff;
+            text-decoration: none;
+
+            color: #0d47a1;
+        }
+    }
+}
