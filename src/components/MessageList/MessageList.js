@@ -22,11 +22,17 @@ const MessageList = ({messages, fetchMessages, loading, isEditing}) => {
 
     }, [])
 
-    const chatWindow = (
-        <ul className='common-chat__list'>
-            {messages.map(msg => <Message message={msg} key={msg.publish_date} />)}
-        </ul>
-    )
+    const chatWindow = (messages) => {
+        return (
+            messages.length
+            ?   <ul className='common-chat__list'>
+                    {messages.map(msg => <Message message={msg} key={msg.publish_date} />)}
+                </ul>
+            :   null
+        )
+    }
+
+
 
     const render = (isReady) => {
         return (
@@ -34,7 +40,7 @@ const MessageList = ({messages, fetchMessages, loading, isEditing}) => {
              ?  loading
                 ?   <Loader/>
                 :   messages.length
-                    ?   chatWindow
+                    ?   chatWindow(messages)
                     :   <p className='empty-message'>Сообщений ещё нет, стань первым!</p>
              :  null
         )
