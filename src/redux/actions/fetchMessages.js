@@ -3,14 +3,14 @@ import {FETCH_MESSAGES_ERROR, FETCH_MESSAGES_START, FETCH_MESSAGES_SUCCESS} from
 import {scrollDown} from "../../components/MessageList/MessageList"
 import {getUser} from "./getUser"
 
-export const fetchMessages = (Reload = true, url = `https://working-chat.firebaseio.com/messages.json`) => {
+export const fetchMessages = (url, Reload = true) => {
     return dispatch => {
         if (Reload) {
             dispatch(fetchMessagesStart())
         }
         try {
             const messages = []
-            axios.get(url)
+            axios.get(url + '.json')
                 .then(response => {
                     if (response.data) {
                         Object.keys(response.data).forEach(key => {
@@ -25,12 +25,14 @@ export const fetchMessages = (Reload = true, url = `https://working-chat.firebas
                         })
                     }
                 })
-                .then(() => dispatch(fetchMessagesSuccess(messages)))
                 .then(() => dispatch(getUser()))
-                .then(() => scrollDown())
+                .then(() => dispatch(fetchMessagesSuccess(messages)))
+                .then(() => Reload? scrollDown() : {})
+
 
         } catch (e) {
             dispatch(fetchMessagesError(e))
+            console.log(e.message)
         }
     }
 }

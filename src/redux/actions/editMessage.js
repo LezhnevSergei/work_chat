@@ -4,11 +4,11 @@ import {fetchMessages} from "./fetchMessages"
 import {editingMessage} from "./messageWhichEditing"
 
 
-export const editMessage = (text, message) => dispatch => {
+export const editMessage = (text, message, url) => dispatch => {
     dispatch(editMessageSuccess())
-    axios.put(`https://working-chat.firebaseio.com/messages/${message.id}.json`, {...message, text})
-        .then(() => dispatch(fetchMessages(false)))
+    axios.put(url + `/${message.id}.json`, {...message, text})
         .then(() => dispatch(editingMessage(false)))
+        .then(() => dispatch(fetchMessages(url, false)))
 }
 
 export const editMessageSuccess = () => {

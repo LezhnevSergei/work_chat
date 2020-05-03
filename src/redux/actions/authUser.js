@@ -4,7 +4,6 @@ import {makeId} from "../../pages/Auth/Auth"
 
 export const authUser = (name, password, url = 'https://working-chat.firebaseio.com/users.json') => {
     return dispatch => {
-        let user
         let isRegisteredUser = false
 
         axios.get(url)
@@ -14,28 +13,25 @@ export const authUser = (name, password, url = 'https://working-chat.firebaseio.
                         const respondUser = response.data[key]
                         if (respondUser.name === name && respondUser.password === password) {
                             isRegisteredUser = true
-
-                            user = respondUser
-
-                            dispatch(authUserSuccess(user))
+                            dispatch(authUserSuccess(respondUser))
+                            localStorage.setItem('userData', JSON.stringify(respondUser))
                         }
                     })
                 }
+
+
+                if (!isRegisteredUser) {
+                    const user = {
+                        name,
+                        password,
+                        id: makeId()
+                    }
+
+                    axios.post(url, user)
+                        .then(() => dispatch(authUserSuccess(user)))
+                        .then(() => localStorage.setItem('userData', JSON.stringify(user)))
+                }
             })
-
-        if (!isRegisteredUser) {
-            user = {
-                name,
-                password,
-                id: makeId()
-            }
-
-            localStorage.setItem('userData', JSON.stringify(user))
-            axios.post(url, user)
-                .then(() => dispatch(authUserSuccess(user)))
-
-
-        }
     }
 }
 

@@ -2,8 +2,11 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios'
 import {Link} from "react-router-dom";
 import { makeId } from '../Auth/Auth';
+import {fetchPrivateChats} from "../../redux/actions/fetchPrivateChats"
+import {createPrivateChat} from "../../redux/actions/createPrivateChat"
+import {connect} from "react-redux"
 
-const CreatePrivateChat = () => {
+const CreatePrivateChat = ({user, createPrivateChat}) => {
 
     const [chatName, setChatName] = useState('')
     const [chatPassword, setChatPassword] = useState('')
@@ -21,14 +24,8 @@ const CreatePrivateChat = () => {
         seter(event.target.value)
     }
 
-    const createChatHandler = (chatName, chatPassword) => {
-        const chat = {
-            name: chatName,
-            password: chatPassword,
-            privateId: makeId()
-        }
-
-        axios.post(`https://working-chat.firebaseio.com/private-chats/${chat.privateId}.json`, chat)
+    const createChatHandler = () => {
+        createPrivateChat(chatName, chatPassword, user)
     }
 
 
@@ -58,7 +55,7 @@ const CreatePrivateChat = () => {
                         type="submit"
                         className="btn btn-primary"
                         disabled={buttonDisable}
-                        onClick={() => createChatHandler(chatName, chatPassword)}
+                        onClick={createChatHandler}
 
                     >
                         Создать чат
@@ -70,4 +67,16 @@ const CreatePrivateChat = () => {
     );
 };
 
-export default CreatePrivateChat;
+const mapStateToProps = state => {
+    return {
+        user: state.userReducer.user
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        createPrivateChat: (name, password, author) => dispatch(createPrivateChat(name, password, author))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePrivateChat);

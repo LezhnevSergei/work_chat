@@ -1,8 +1,10 @@
 import axios from "axios"
-import {FETCH_MESSAGES_ERROR, FETCH_MESSAGES_START, FETCH_MESSAGES_SUCCESS} from "../types"
+import {
+    FETCH_PRIVATE_CHAT_ERROR,
+    FETCH_PRIVATE_CHAT_START,
+    FETCH_PRIVATE_CHAT_SUCCESS
+} from "../types"
 import {scrollDown} from "../../components/MessageList/MessageList"
-import {getUser} from "./getUser"
-import {makeId} from "../../pages/Auth/Auth"
 
 export const fetchPrivateChats = (Reload = true, url = `https://working-chat.firebaseio.com/private-chats.json`) => {
     return dispatch => {
@@ -10,24 +12,20 @@ export const fetchPrivateChats = (Reload = true, url = `https://working-chat.fir
             dispatch(fetchPrivateChatsStart())
         }
         try {
-            const privateChats = []
+            let respondChats = []
             axios.get(url)
                 .then(response => {
                     if (response.data) {
                         Object.keys(response.data).forEach(key => {
-                            const privateChat = response.data[key]
-                            privateChats.push({
-                                id: key,
-                                name: privateChat.chatName,
-                                password: privateChat.chatPassword,
-                                privateId: makeId()
-                            })
+                            respondChats.push({...response.data[key], privateId: key})
                         })
                     }
+
+                    return respondChats
                 })
-                .then(() => dispatch(fetchPrivateChatsSuccess(privateChats)))
-                .then(() => dispatch(getUser()))
+                .then((res) => dispatch(fetchPrivateChatsSuccess(respondChats)))
                 .then(() => scrollDown())
+                // .then(() => dispatch(fetchMessagesSuccess([])))
 
         } catch (e) {
             dispatch(fetchPrivateChatsError(e))
@@ -37,20 +35,20 @@ export const fetchPrivateChats = (Reload = true, url = `https://working-chat.fir
 
 export const fetchPrivateChatsStart = () => {
     return {
-        type: FETCH_MESSAGES_START
+        type: FETCH_PRIVATE_CHAT_START
     }
 }
 
 export const fetchPrivateChatsSuccess = (privateChats) => {
     return {
-        type: FETCH_MESSAGES_SUCCESS,
+        type: FETCH_PRIVATE_CHAT_SUCCESS,
         privateChats
     }
 }
 
 export const fetchPrivateChatsError = (e) => {
     return {
-        type: FETCH_MESSAGES_ERROR,
+        type: FETCH_PRIVATE_CHAT_ERROR,
         error: e
     }
 }

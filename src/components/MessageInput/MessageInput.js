@@ -6,7 +6,7 @@ import axios from "axios"
 import {fetchMessages} from "../../redux/actions/fetchMessages"
 import {editingMessage} from "../../redux/actions/messageWhichEditing"
 
-const MessageInput = ({createMessage, user, editMessage, editingMessage, isEditing, messageWhichEditing}) => {
+const MessageInput = ({url, createMessage, user, editMessage, editingMessage, isEditing, messageWhichEditing}) => {
 
     const [text, setText] = useState('')
 
@@ -16,14 +16,14 @@ const MessageInput = ({createMessage, user, editMessage, editingMessage, isEditi
 
     const createMessageHandler = (text) => {
         if (text.trim()) {
-            createMessage(text, user)
+            createMessage(text, user, url)
         }
 
         setText('')
     }
 
     const editMessageHandler = (text) => {
-        editMessage(text, messageWhichEditing)
+        editMessage(text, messageWhichEditing, url)
         editingMessage(false)
         setText('')
     }
@@ -77,8 +77,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createMessage: (text, user) => dispatch(createMessage(text, user)),
-        editMessage: (text, message) => dispatch(editMessage(text, message)),
+        createMessage: (text, user, url) => dispatch(createMessage(text, user, url)),
+        editMessage: (text, message, url) => dispatch(editMessage(text, message, url)),
         fetchMessages: () => dispatch(fetchMessages()),
         editingMessage: (isEditing) => dispatch(editingMessage(isEditing))
     }

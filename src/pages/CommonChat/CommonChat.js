@@ -6,7 +6,7 @@ import Chat from "../../components/Chat/Chat"
 const CommonChat = () => {
     return (
         <div>
-            <Chat/>
+            <Chat url={'https://working-chat.firebaseio.com/messages'}/>
         </div>
     )
 }

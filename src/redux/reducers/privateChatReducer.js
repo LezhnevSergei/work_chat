@@ -1,20 +1,35 @@
-import {CREATE_CHAT} from "../types"
+import {
+    CREATE_PRIVATE_CHAT,
+    FETCH_PRIVATE_CHAT_START,
+    FETCH_PRIVATE_CHAT_SUCCESS
+} from "../types"
 
 const initialState = {
-    privateChats: []
+    privateChats: [],
+    loading: false
 }
 
-const userReducer = (state = initialState, action) => {
+const privateChatsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CREATE_CHAT:
+        case FETCH_PRIVATE_CHAT_START:
             return {
                 ...state,
-                privateChats: [...action.privateChats]
+                loading: true
             }
-
+        case FETCH_PRIVATE_CHAT_SUCCESS:
+            return {
+                ...state,
+                privateChats: action.privateChats,
+                loading: false
+            }
+        case CREATE_PRIVATE_CHAT:
+            return {
+                ...state,
+                privateChats: [...state.privateChats, action.privateChats]
+            }
         default:
             return state
     }
 }
 
-export default userReducer
+export default privateChatsReducer

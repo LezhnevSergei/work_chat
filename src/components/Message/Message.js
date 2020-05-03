@@ -6,8 +6,9 @@ import {fetchMessages} from "../../redux/actions/fetchMessages"
 import {getUser} from "../../redux/actions/getUser"
 import {editingMessage, messageWhichEditing} from "../../redux/actions/messageWhichEditing"
 
-const Message = ({message, user, removeMessage, editingMessage, isEditing, messageWhichEditing}) => {
+const Message = ({message, user, url, removeMessage, editingMessage, isEditing, messageWhichEditing}) => {
 
+    console.log(url)
     const editMessageHandler = (message) => {
         messageWhichEditing(message)
 
@@ -17,13 +18,13 @@ const Message = ({message, user, removeMessage, editingMessage, isEditing, messa
     }
 
     const removeMessageHandler = (message) => {
-        removeMessage(message)
+        removeMessage(url, message)
     }
 
     return (
-        <li className='common-chat__message'>
+        <li className='private-chat'>
             <div>
-                <h6 className='message__author'>{message.author}</h6>
+                <h6 className='private-chat__name'>{message.author}</h6>
                 <p className='message__text'>{message.text}</p>
                 <small className='message__publish-date'>{message.publish_date}</small>
             </div>
@@ -48,7 +49,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        removeMessage: (message) => dispatch(removeMessage(message)),
+        removeMessage: (url, message) => dispatch(removeMessage(url, message)),
         fetchMessages: () => dispatch(fetchMessages),
         getUser: () => dispatch(getUser()),
         messageWhichEditing: (message) => dispatch(messageWhichEditing(message)),

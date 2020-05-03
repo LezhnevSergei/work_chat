@@ -8,6 +8,7 @@ import Auth from "./pages/Auth/Auth"
 import {connect} from "react-redux"
 import {getUser} from "./redux/actions/getUser"
 import CreatePrivateChat from "./pages/CreatePrivateChat/CreatePrivateChat"
+import Chat from "./components/Chat/Chat"
 
 const App = ({user, getUser}) => {
     useEffect(() => {
@@ -18,16 +19,17 @@ const App = ({user, getUser}) => {
         user
             ?   <>
                 <Header/>
+                <Redirect path='/private/create-chat' to='/private' />
                 <Route path='/common' component={CommonChat} />
                 <Route path='/private/create-chat' component={CreatePrivateChat} />
+                <Route path='/private/:privateId' component={Chat} />
                 <Route path='/private' component={PrivateChats} exact/>
                 <Redirect from='/auth' to='/common' exact/>
-                {/*<Route path='/createPrivateChat' component={CreateChat} />*/}
             </>
             :   <>
-                <Route path='/auth' component={Auth} />
-                <Redirect from='' to='/auth'/>
-            </>
+                    <Route path='/auth' component={Auth} />
+                    <Redirect from='' to='/auth'/>
+                </>
     )
 
     return (

@@ -3,7 +3,7 @@ import axios from 'axios'
 import {scrollDown} from "../../components/MessageList/MessageList"
 import {getUser} from "./getUser"
 
-export const createMessage = (text, author, url = 'https://working-chat.firebaseio.com/messages.json') => {
+export const createMessage = (text, author, url) => {
      return dispatch => {
          const message = {
              author: author.name,
@@ -12,12 +12,11 @@ export const createMessage = (text, author, url = 'https://working-chat.firebase
              publish_date: new Date().toString()
          }
 
-         axios.post(url, message).then(res => message.id = res.data.name)
+         axios.post(url+'.json', message)
+             .then(res => message.id = res.data.name)
              .then(dispatch(createMessageSuccess(message)))
              .then(() => dispatch(getUser()))
              .then(() => scrollDown())
-
-         scrollDown()
      }
 }
 

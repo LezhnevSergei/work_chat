@@ -12,27 +12,23 @@ export const scrollDown = async () => {
     }
 }
 
-const MessageList = ({messages, fetchMessages, loading, isEditing}) => {
+const MessageList = ({url, messages, fetchMessages, loading}) => {
 
     const [isReady, setIsReady] = useState(false)
 
     useEffect(() => {
-        fetchMessages()
+        fetchMessages(url)
         setIsReady(true)
 
     }, [])
 
     const chatWindow = (messages) => {
         return (
-            messages.length
-            ?   <ul className='common-chat__list'>
-                    {messages.map(msg => <Message message={msg} key={msg.publish_date} />)}
-                </ul>
-            :   null
+            <ul className='common-chat__list'>
+                {messages.map(msg => <Message message={msg} url={url} key={msg.publish_date} />)}
+            </ul>
         )
     }
-
-
 
     const render = (isReady) => {
         return (
@@ -60,14 +56,13 @@ const MessageList = ({messages, fetchMessages, loading, isEditing}) => {
 const mapStateToProps = (state) => {
     return {
         messages: state.messagesReducer.messages,
-        loading: state.messagesReducer.loading,
-        isEditing: state.messagesReducer.isEditing
+        loading: state.messagesReducer.loading
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchMessages: () => dispatch(fetchMessages())
+        fetchMessages: (url) => dispatch(fetchMessages(url))
     }
 }
 
