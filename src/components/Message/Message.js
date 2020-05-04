@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './Message.scss'
 import {connect} from "react-redux"
 import {removeMessage} from "../../redux/actions/removeMessage"

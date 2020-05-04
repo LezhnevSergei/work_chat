@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, NavLink, withRouter} from "react-router-dom";
 import { connect } from 'react-redux';
-import axios from 'axios'
 import './Auth.scss'
 import {authUser} from "../../redux/actions/authUser"
 
@@ -16,7 +15,6 @@ export const makeId = (length = 30) => {
 }
 
 const Auth = ({authUser}) => {
-
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [buttonDisable, setButtonDisable] = useState(true)
@@ -35,7 +33,6 @@ const Auth = ({authUser}) => {
 
     const setUserHandler = (name, password) => {
         authUser(name, password)
-
     }
 
     return (

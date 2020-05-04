@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {connect} from 'react-redux'
 import './PrivateChat.scss'
 import {Link} from "react-router-dom"
 
@@ -41,17 +40,4 @@ const PrivateChat = ({chatData}) => {
     );
 };
 
-//const mapStateToProps = (state) => {
-//return {
-//
-//}
-//}
-
-//const mapDispatchToProps = (dispatch) => {
-//return {
-//
-//}
-//}
-
-//export default connect(mapStateToProps, mapDispatchToProps)(PrivateChat);
 export default PrivateChat;

@@ -25,8 +25,6 @@ export const fetchPrivateChats = (Reload = true, url = `https://working-chat.fir
                 })
                 .then((res) => dispatch(fetchPrivateChatsSuccess(respondChats)))
                 .then(() => scrollDown())
-                // .then(() => dispatch(fetchMessagesSuccess([])))
-
         } catch (e) {
             dispatch(fetchPrivateChatsError(e))
         }

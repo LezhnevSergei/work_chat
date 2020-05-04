@@ -1,4 +1,4 @@
-import {CREATE_MESSAGE, CREATE_PRIVATE_CHAT} from "../types"
+import {CREATE_PRIVATE_CHAT} from "../types"
 import axios from 'axios'
 import {getUser} from "./getUser"
 
@@ -16,7 +16,6 @@ export const createPrivateChat = (name, password, author) => {
             .then(res => chat.privateId = res.data.name)
             .then(dispatch(createPrivateChatSuccess(chat)))
             .then(() => dispatch(getUser()))
-
     }
 }
 

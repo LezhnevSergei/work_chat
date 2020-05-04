@@ -19,7 +19,6 @@ export const authUser = (name, password, url = 'https://working-chat.firebaseio.
                     })
                 }
 
-
                 if (!isRegisteredUser) {
                     const user = {
                         name,
