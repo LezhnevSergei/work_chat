@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/work_chat/static/css/main.b386b193.chunk.css",
+    "main.js": "/work_chat/static/js/main.5bd41fe0.chunk.js",
+    "main.js.map": "/work_chat/static/js/main.5bd41fe0.chunk.js.map",
+    "runtime-main.js": "/work_chat/static/js/runtime-main.2fbcb370.js",
+    "runtime-main.js.map": "/work_chat/static/js/runtime-main.2fbcb370.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/work_chat/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.d3f775be.chunk.js": "/work_chat/static/js/2.d3f775be.chunk.js",
+    "static/js/2.d3f775be.chunk.js.map": "/work_chat/static/js/2.d3f775be.chunk.js.map",
+    "index.html": "/work_chat/index.html",
+    "precache-manifest.6f9f873ba966790d80b489ce839352d7.js": "/work_chat/precache-manifest.6f9f873ba966790d80b489ce839352d7.js",
+    "service-worker.js": "/work_chat/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/work_chat/static/css/2.47e06e2e.chunk.css.map",
+    "static/css/main.b386b193.chunk.css.map": "/work_chat/static/css/main.b386b193.chunk.css.map",
+    "static/js/2.d3f775be.chunk.js.LICENSE.txt": "/work_chat/static/js/2.d3f775be.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2fbcb370.js",
+    "static/css/2.47e06e2e.chunk.css",
+    "static/js/2.d3f775be.chunk.js",
+    "static/css/main.b386b193.chunk.css",
+    "static/js/main.5bd41fe0.chunk.js"
+  ]
+}
