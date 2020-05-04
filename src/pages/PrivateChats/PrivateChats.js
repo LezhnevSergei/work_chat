@@ -12,11 +12,9 @@ const PrivateChats = ({privateChats, fetchPrivateChats, isLoading}) => {
     useEffect(() => {
         fetchPrivateChats()
         setIsReady(true)
-        console.log(privateChats)
     }, [])
 
     const privateChatsList = (privateChats) => {
-
         return (
             <ul className='common-chat__list'>
                 {privateChats.reverse().map(chat => <PrivateChat chatData={chat} key={chat.privateId}/>)}
@@ -39,7 +37,7 @@ const PrivateChats = ({privateChats, fetchPrivateChats, isLoading}) => {
 
     return (
         <div className='chat'>
-            <Link to='/private/create-chat' className='create-chat__button'>
+            <Link to='/create-private-chat' className='create-chat__button'>
                 <button className='btn btn-primary'>
                     Создать приватный чат
                 </button>

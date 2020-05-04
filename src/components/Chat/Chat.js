@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import {connect} from 'react-redux'
 import './Chat.scss'
 import MessageList from "../MessageList/MessageList"
 import MessageInput from "../MessageInput/MessageInput"
@@ -18,12 +17,5 @@ const Chat = ({url = 'https://working-chat.firebaseio.com/private-chats', match}
         </div>
     )
 }
-//
-// const mapStateToProps = (state) => {
-//     return {}
-// }
-//
-// const mapDispatchToProps = {}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Chat)
 export default withRouter(Chat)

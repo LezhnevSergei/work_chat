@@ -7,8 +7,6 @@ import {getUser} from "../../redux/actions/getUser"
 import {editingMessage, messageWhichEditing} from "../../redux/actions/messageWhichEditing"
 
 const Message = ({message, user, url, removeMessage, editingMessage, isEditing, messageWhichEditing}) => {
-
-    console.log(url)
     const editMessageHandler = (message) => {
         messageWhichEditing(message)
 
@@ -22,17 +20,17 @@ const Message = ({message, user, url, removeMessage, editingMessage, isEditing, 
     }
 
     return (
-        <li className='private-chat'>
+        <li className='message'>
             <div>
-                <h6 className='private-chat__name'>{message.author}</h6>
+                <h6 className='message__name'>{message.author}</h6>
                 <p className='message__text'>{message.text}</p>
                 <small className='message__publish-date'>{message.publish_date}</small>
             </div>
             {
                 user.id === message.author_id
                 ?   <div className='message__buttons'>
-                        <button onClick={() => editMessageHandler(message)}>Редактировать</button>
-                        <button onClick={() => removeMessageHandler(message)}>Удалить</button>
+                        <button className='button__edit-btn' onClick={() => editMessageHandler(message)}>Редактировать</button>
+                        <button className='button__remove-btn' onClick={() => removeMessageHandler(message)}>Удалить</button>
                     </div>
                 :   null
             }

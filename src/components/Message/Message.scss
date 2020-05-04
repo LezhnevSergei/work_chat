@@ -1,4 +1,4 @@
-.private-chat {
+.message {
     background-color: white;
 
     margin: 0;
@@ -12,7 +12,7 @@
 
     box-shadow:0px 1px 4px 1px rgba(0,0,0,0.16);
 
-    .private-chat__name {
+    .message__name {
         padding: 0;
         margin: 0;
 
@@ -22,6 +22,8 @@
     .message__text {
         padding: 0;
         margin: 0;
+        width: 600px;
+        word-break:break-all;
 
         margin-bottom: 5px;
     }
@@ -31,16 +33,32 @@
         margin: 0;
     }
 
-}
 
-.message__buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    .message__buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-    button {
-        background: transparent;
-        border-radius: 5px;
-        border: 2px solid #000000;
+        .button__edit-btn {
+            margin-bottom: 10px;
+
+            &:hover {
+                background-color: yellow;
+            }
+        }
+
+        .button__remove-btn {
+
+            &:hover {
+                background-color: red;
+                color: #ffffff;
+            }
+        }
+
+        button {
+            background: transparent;
+            border-radius: 5px;
+            border: 2px solid #000000;
+        }
     }
 }

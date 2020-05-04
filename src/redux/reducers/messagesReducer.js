@@ -25,7 +25,7 @@ const messagesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                messages: action.messages
+                messages: [...action.messages]
             }
         case FETCH_MESSAGES_ERROR:
             return {

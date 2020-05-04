@@ -1,25 +1,42 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux'
 import './PrivateChat.scss'
 import {Link} from "react-router-dom"
 
 const PrivateChat = ({chatData}) => {
+    const [passwordInput, setPasswordInput] = useState('')
+    const [success,setSuccess] = useState(true)
+
+    useEffect(() => {
+        if (chatData.password === passwordInput)
+            setSuccess(false)
+        else {
+            setSuccess(true)
+        }
+    }, [passwordInput])
+
+
     return (
-        <Link to={`/private/${chatData.privateId}`}>
-            <li className='private-chat'>
-                <div>
-                    <h6 className='private-chat__name'>{chatData.name}</h6>
-                </div>
-                {
-                    // user.id === message.author_id
-                    //     ? <div className='message__buttons'>
-                    //         <button onClick={() => editMessageHandler(message)}>Редактировать</button>
-                    //         <button onClick={() => removeMessageHandler(message)}>Удалить</button>
-                    //     </div>
-                    //     : null
-                }
-            </li>
-        </Link>
+        <li className='private-chat'>
+            <div className='private-chat__room'>
+                <h6 className='room__name'>{chatData.name}</h6>
+                <form className='room__form'>
+                    <input
+                        type="text"
+                        value={passwordInput}
+                        onChange={(e) => setPasswordInput(e.target.value)}
+                    />
+                    <Link to={`/private/${chatData.privateId}`}>
+                        <button
+                            // onClick={successHandler}
+                            disabled={success}
+                        >
+                            Войти
+                        </button>
+                    </Link>
+                </form>
+            </div>
+        </li>
 
     );
 };

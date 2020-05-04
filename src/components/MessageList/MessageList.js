@@ -5,9 +5,9 @@ import Message from "../Message/Message"
 import Loader from "../Loader/Loader"
 import {fetchMessages} from "../../redux/actions/fetchMessages"
 
-export const scrollDown = async () => {
+export const scrollDown = () => {
     if (document.getElementById('chat-window')) {
-        const chatWindow = await document.getElementById('chat-window')
+        const chatWindow = document.getElementById('chat-window')
         chatWindow.scrollTop = chatWindow.scrollHeight;
     }
 }

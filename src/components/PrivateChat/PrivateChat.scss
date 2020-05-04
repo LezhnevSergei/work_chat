@@ -5,8 +5,7 @@
     padding: 0;
 
     margin-bottom: 10px;
-    padding: 20px;
-    padding-bottom: 10px;
+    padding: 10px 20px;
 
     display: flex;
     justify-content: space-between;
@@ -27,6 +26,23 @@
         margin: 0;
     }
 
+    .private-chat__room {
+        vertical-align: middle;
+        text-align: center;
+
+        display: flex;
+        justify-content: space-between;
+
+        width: 100%;
+
+        .room__name {
+            margin-bottom: 0;
+            line-height: 30px;
+        }
+
+        .room__form {
+        }
+    }
 }
 
 .message__buttons {

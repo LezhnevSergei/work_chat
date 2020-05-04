@@ -1,13 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios'
 import {Link} from "react-router-dom";
-import { makeId } from '../Auth/Auth';
-import {fetchPrivateChats} from "../../redux/actions/fetchPrivateChats"
 import {createPrivateChat} from "../../redux/actions/createPrivateChat"
 import {connect} from "react-redux"
 
 const CreatePrivateChat = ({user, createPrivateChat}) => {
-
     const [chatName, setChatName] = useState('')
     const [chatPassword, setChatPassword] = useState('')
     const [buttonDisable, setButtonDisable] = useState(true)

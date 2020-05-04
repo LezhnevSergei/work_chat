@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {connect} from "react-redux"
 import {createMessage} from "../../redux/actions/createMessage"
 import {editMessage} from "../../redux/actions/editMessage"
-import axios from "axios"
 import {fetchMessages} from "../../redux/actions/fetchMessages"
 import {editingMessage} from "../../redux/actions/messageWhichEditing"
+import './MessageInput.scss'
 
 const MessageInput = ({url, createMessage, user, editMessage, editingMessage, isEditing, messageWhichEditing}) => {
 
@@ -14,7 +14,8 @@ const MessageInput = ({url, createMessage, user, editMessage, editingMessage, is
         setText(e.target.value)
     }
 
-    const createMessageHandler = (text) => {
+    const createMessageHandler = (text, e) => {
+        e.preventDefault()
         if (text.trim()) {
             createMessage(text, user, url)
         }
@@ -22,7 +23,8 @@ const MessageInput = ({url, createMessage, user, editMessage, editingMessage, is
         setText('')
     }
 
-    const editMessageHandler = (text) => {
+    const editMessageHandler = (text, e) => {
+        e.preventDefault()
         editMessage(text, messageWhichEditing, url)
         editingMessage(false)
         setText('')
@@ -30,40 +32,33 @@ const MessageInput = ({url, createMessage, user, editMessage, editingMessage, is
 
     const button = (
         isEditing
-        ?   <div className="input-group-append">
-                <button
-                    className="btn btn-outline-secondary"
-                    type="submit"
-                    onClick={() => editMessageHandler(text)}
-                >
-                    Отредактировать
-                </button>
-            </div>
-        :   <div className="input-group-append">
-                <button
-                    className="btn btn-outline-secondary"
-                    type="submit"
-                    onClick={(e) => createMessageHandler(text)}
-                >
-                    Отправить
-                </button>
-            </div>
+        ?   <button
+                className="message-input__button"
+                type="submit"
+                onClick={(e) => editMessageHandler(text, e)}
+            >
+                Отредактировать
+            </button>
+        :   <button
+                className="message-input__button"
+                type="submit"
+                onClick={(e) => createMessageHandler(text, e)}
+            >
+                Отправить
+            </button>
+
     )
 
-
     return (
-        <div className="input-group mb-3 common-chat__input" onSubmit={(e) => createMessageHandler(text)}>
+        <form className='message-input__from'>
             <input
+                className='message-input__input'
                 type="text"
-                className="form-control"
-                placeholder="Введите сообщение..."
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-                onChange={ChangeTextHandler}
                 value={text}
+                onChange={ChangeTextHandler}
             />
             {button}
-        </div>
+        </form>
     )
 }
 
