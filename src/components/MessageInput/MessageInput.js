@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from "react-redux"
 import {createMessage} from "../../redux/actions/createMessage"
 import {editMessage} from "../../redux/actions/editMessage"
@@ -9,6 +9,13 @@ import './MessageInput.scss'
 const MessageInput = ({url, createMessage, user, editMessage, editingMessage, isEditing, messageWhichEditing}) => {
 
     const [text, setText] = useState('')
+
+    useEffect(() => {
+        if (isEditing) {
+            setText(messageWhichEditing.text)
+            document.querySelector('.message-input__input').focus();
+        }
+    }, [isEditing])
 
     const ChangeTextHandler = (e) => {
         setText(e.target.value)
@@ -46,7 +53,6 @@ const MessageInput = ({url, createMessage, user, editMessage, editingMessage, is
             >
                 Отправить
             </button>
-
     )
 
     return (
@@ -70,7 +76,7 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
         createMessage: (text, user, url) => dispatch(createMessage(text, user, url)),
         editMessage: (text, message, url) => dispatch(editMessage(text, message, url)),

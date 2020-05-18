@@ -11,7 +11,7 @@ const Message = ({message, user, url, removeMessage, editingMessage, isEditing, 
         messageWhichEditing(message)
 
         if (isEditing) {
-            editingMessage(false)
+            editingMessage(isEditing)
         }
     }
 
