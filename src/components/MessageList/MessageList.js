@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import './MessageList.scss'
-import Message from "../Message/Message"
-import Loader from "../Loader/Loader"
-import {fetchMessages} from "../../redux/actions/fetchMessages"
+import Message from '../Message/Message'
+import Loader from '../Loader/Loader'
+import {fetchMessages} from '../../redux/actions/fetchMessages'
 
 export const scrollDown = () => {
     if (document.getElementById('chat-window')) {
@@ -53,16 +53,16 @@ const MessageList = ({url, messages, fetchMessages, loading}) => {
 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         messages: state.messagesReducer.messages,
         loading: state.messagesReducer.loading
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
-        fetchMessages: (url) => dispatch(fetchMessages(url))
+        fetchMessages: url => dispatch(fetchMessages(url))
     }
 }
 

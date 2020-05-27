@@ -18,15 +18,13 @@ const App = ({user, getUser}) => {
     const render = (
         user
             ?   <>
-                <Header/>
+                    <Header/>
 
-                <Route path='/common' component={CommonChat} />
-                <Route path='/create-private-chat' component={CreatePrivateChat} exact/>
-                <Route path='/private/:privateId' component={Chat} />
-                <Route path='/private' component={PrivateChats} exact/>
-
-                <Redirect from='' to='/common'/>
-            </>
+                    <Route path='/common' component={CommonChat} />
+                    <Route path='/create-private-chat' component={CreatePrivateChat} exact/>
+                    <Route path='/private/:privateId' component={Chat} />
+                    <Route path='/private' component={PrivateChats} exact/>
+                </>
             :   <>
                     <Route path='/auth' component={Auth} />
                     <Redirect from='' to='/auth'/>

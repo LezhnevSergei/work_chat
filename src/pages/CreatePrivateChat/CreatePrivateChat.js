@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {useHistory} from 'react-router-dom';
 import {createPrivateChat} from "../../redux/actions/createPrivateChat"
-import {connect} from "react-redux"
+import {connect} from 'react-redux'
 
 const CreatePrivateChat = ({user, createPrivateChat}) => {
     const [chatName, setChatName] = useState('')
     const [chatPassword, setChatPassword] = useState('')
     const [buttonDisable, setButtonDisable] = useState(true)
+    const history = useHistory()
 
     useEffect(() => {
-        if (!!(chatName.trim() && chatPassword.trim())) {
+        if (chatName.trim() && chatPassword.trim()) {
             setButtonDisable(false)
         } else {
             setButtonDisable(true)
@@ -22,13 +23,13 @@ const CreatePrivateChat = ({user, createPrivateChat}) => {
 
     const createChatHandler = () => {
         createPrivateChat(chatName, chatPassword, user)
+        history.push('/private')
     }
-
 
     return (
         <div className='auth'>
             <form className='auth__form'>
-                <div className="form-group">
+                <div className='form-group'>
                     <label>Введите название чата</label>
                     <input
                         type="text"
@@ -46,18 +47,14 @@ const CreatePrivateChat = ({user, createPrivateChat}) => {
                         onChange={(e) => changeInputHandler(setChatPassword, e)}
                     />
                 </div>
-                <Link to='/common'>
-                    <button
-                        type="submit"
-                        className="btn btn-primary"
-                        disabled={buttonDisable}
-                        onClick={createChatHandler}
-
-                    >
-                        Создать чат
-                    </button>
-                </Link>
-
+                <button
+                    type='button'
+                    className="btn btn-primary"
+                    disabled={buttonDisable}
+                    onClick={createChatHandler}
+                >
+                    Создать чат
+                </button>
             </form>
         </div>
     );
@@ -65,7 +62,8 @@ const CreatePrivateChat = ({user, createPrivateChat}) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.userReducer.user
+        user: state.userReducer.user,
+        privateChatId: state.privateChatsReducer.lastPrivateChatId
     }
 }
 

@@ -14,21 +14,15 @@ const PrivateChats = ({privateChats, fetchPrivateChats, isLoading}) => {
         setIsReady(true)
     }, [])
 
-    const privateChatsList = (privateChats) => {
-        return (
-            <ul className='common-chat__list'>
-                {privateChats.reverse().map(chat => <PrivateChat chatData={chat} key={chat.privateId}/>)}
-            </ul>
-        )
-    }
-
     const render = (isReady) => {
         return (
             isReady
             ?   isLoading
                 ?   <Loader/>
                 :   privateChats.length
-                    ?   privateChatsList(privateChats)
+                    ?   <ul className='common-chat__list'>
+                            {privateChats.reverse().map(chat => <PrivateChat chatData={chat} key={chat.privateId}/>)}
+                        </ul>
                     :   <p className='empty-message'>Приватных чатов ещё нет!</p>
 
             :   null

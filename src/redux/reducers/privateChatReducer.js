@@ -6,7 +6,8 @@ import {
 
 const initialState = {
     privateChats: [],
-    loading: false
+    loading: false,
+    lastPrivateChatId: null
 }
 
 const privateChatsReducer = (state = initialState, action) => {
@@ -25,7 +26,8 @@ const privateChatsReducer = (state = initialState, action) => {
         case CREATE_PRIVATE_CHAT:
             return {
                 ...state,
-                privateChats: [...state.privateChats, action.privateChats]
+                privateChats: [...state.privateChats, action.privateChat],
+                lastPrivateChatId: action.privateChat.privateId
             }
         default:
             return state
